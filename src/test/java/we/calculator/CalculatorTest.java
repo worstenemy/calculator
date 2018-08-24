@@ -1,5 +1,6 @@
 package we.calculator;
 
+import org.antlr.v4.runtime.misc.ParseCancellationException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,5 +49,11 @@ public class CalculatorTest {
 		String text = "1 + 2 + 3 * (5 - 2 + (2 - 0))";
 		Expression expression = Expressions.create(text);
 		Assert.assertEquals(18, expression.evaluate());
+	}
+
+	@Test(expected = ParseCancellationException.class)
+	public void test_illegal_number() {
+		String text = "123.a + 2 + 3";
+		Expressions.create(text);
 	}
 }
