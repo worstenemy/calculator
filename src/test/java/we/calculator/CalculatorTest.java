@@ -51,6 +51,13 @@ public class CalculatorTest {
 		Assert.assertEquals(18, expression.evaluate());
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void test_paren_divide_by_zero() {
+		String text = "1 + 2 + 3 * (5 - 2 + (2 - 0)) / 0";
+		Expression expression = Expressions.create(text);
+		expression.evaluate();
+	}
+
 	@Test(expected = ParseCancellationException.class)
 	public void test_illegal_number() {
 		String text = "123.a + 2 + 3";
